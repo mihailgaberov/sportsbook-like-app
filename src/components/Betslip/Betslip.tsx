@@ -26,14 +26,8 @@ export default function Betslip() {
   });
 
   type DrawerSide = 'right';
-  const toggleDrawer = (side: DrawerSide, open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent,
-  ) => {
-    if (
-      event.type === 'keydown' &&
-      ((event as React.KeyboardEvent).key === 'Tab' ||
-        (event as React.KeyboardEvent).key === 'Shift')
-    ) {
+  const toggleDrawer = (side: DrawerSide, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
       return;
     }
 
@@ -60,7 +54,7 @@ export default function Betslip() {
         <Divider />
         <ListItem button={true} key={'SEL_4'} data-selelection-id={'SEL_4'}>
           <ListItemText secondary={'Messi to Score First'} />
-          <ListItemText primary={'1.3'}  />
+          <ListItemText primary={'1.3'} />
           <Button onClick={removeSelection}>Delete</Button>
         </ListItem>
         <Divider />
