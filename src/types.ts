@@ -10,7 +10,7 @@ interface IEventType {
 interface IMarketType {
   id: string;
   name: string;
-  markets: ISelectionType[];
+  selections: ISelectionType[];
 }
 
 interface ISelectionType {
