@@ -7,16 +7,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 
-/*type SelectionType = {
-  id: string;
-  name: string;
-  price: number;
-}*/
-
 const useStyles = makeStyles({
+  closeButton: {
+    margin: '7px',
+  },
   list: {
+    textAlign: 'right',
     width: 300,
-  }
+  },
 });
 
 export default function Betslip() {
@@ -26,25 +24,25 @@ export default function Betslip() {
   });
 
   type DrawerSide = 'right';
-  const toggleDrawer = (side: DrawerSide, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+  const toggleDrawer = (side: DrawerSide, isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
       return;
     }
 
-    setState({ ...state, [side]: open });
+    setState({ ...state, [side]: isOpen });
   };
 
   const removeSelection = (e: React.MouseEvent): any => {
-    console.log(e.currentTarget.parentElement);
+    // @ts-ignore
+    console.log(e.currentTarget.parentElement.dataset.selelectionId);
   };
 
   const sideList = (side: DrawerSide) =>
     <div
       className={classes.list}
       role="presentation"
-      onClick={toggleDrawer(side, false)}
-      onKeyDown={toggleDrawer(side, false)}
     >
+      <Button onClick={toggleDrawer(side, false)} className={classes.closeButton}>X</Button>
       <List>
         <ListItem button={true} key={'SEL_1'} data-selelection-id={'SEL_1'}>
           <ListItemText secondary={'Real Madrid to WIN'} />
