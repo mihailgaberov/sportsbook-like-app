@@ -1,7 +1,6 @@
 export default [
   {
     "id": "EVT_1",
-    "name": "Real Madrid vs Barcelona",
     "markets": [
       {
         "id": "MKT_1",
@@ -40,11 +39,11 @@ export default [
           }
         ]
       }
-    ]
+    ],
+    "name": "Real Madrid vs Barcelona"
   },
   {
     "id": "EVT_2",
-    "name": "Atletico Madrid vs Malaga",
     "markets": [
       {
         "id": "MKT_3",
@@ -62,11 +61,12 @@ export default [
           }
         ]
       }
-    ]
+    ],
+    "name": "Atletico Madrid vs Malaga"
   },
   {
     "id": "EVT_3",
-    "name": "Empty Event that shouldn't render",
-    "markets": []
+    "markets": [],
+    "name": "Empty Event that shouldn't render"
   }
 ]
