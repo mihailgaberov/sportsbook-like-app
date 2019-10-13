@@ -1,22 +1,19 @@
 /** The response type of the API call */
 // type ResponseType = EventsType[];
 
-/** Event Entity */
-type EventType = {
+interface IEventType {
   id: string;
   name: string;
-  markets: MarketType[];
-};
-
-/** Market Entity */
-type MarketType = {
-  id: string;
-  name: string;
-  markets: SelectionType[];
+  markets: IMarketType[];
 }
 
-/** Selection Entity */
-type SelectionType = {
+interface IMarketType {
+  id: string;
+  name: string;
+  markets: ISelectionType[];
+}
+
+interface ISelectionType {
   id: string;
   name: string;
   price: number;

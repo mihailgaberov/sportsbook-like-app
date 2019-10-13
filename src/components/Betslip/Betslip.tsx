@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: 300,
   }
 });
 
@@ -55,6 +55,12 @@ export default function Betslip() {
         <ListItem button={true} key={'SEL_1'} data-selelection-id={'SEL_1'}>
           <ListItemText secondary={'Real Madrid to WIN'} />
           <ListItemText primary={'1.2'} />
+          <Button onClick={removeSelection}>Delete</Button>
+        </ListItem>
+        <Divider />
+        <ListItem button={true} key={'SEL_4'} data-selelection-id={'SEL_4'}>
+          <ListItemText secondary={'Messi to Score First'} />
+          <ListItemText primary={'1.3'}  />
           <Button onClick={removeSelection}>Delete</Button>
         </ListItem>
         <Divider />
