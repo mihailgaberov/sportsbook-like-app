@@ -1,3 +1,3 @@
-import Betslip from "./Betslip";
+import Betslip from './Betslip';
 
 export default Betslip;

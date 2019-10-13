@@ -61,7 +61,7 @@ export default function Betslip() {
 
   return (
     <div>
-      <Button onClick={toggleDrawer('right', true)}>Open Right</Button>
+      {/*<Button onClick={toggleDrawer('right', true)}>Open Right</Button>*/}
       <Drawer anchor="right" open={state.right} onClose={toggleDrawer('right', false)}>
         {sideList('right')}
       </Drawer>
