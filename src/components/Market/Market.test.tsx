@@ -6,7 +6,7 @@ import mockSportData from '../../mocks/sport-events';
 describe('Market', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<Market title={'test'} selections={mockSportData[0].markets[0].selections} />, div);
+    ReactDOM.render(<Market name={'test'} selections={mockSportData[0].markets[0].selections} />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 });

@@ -4,7 +4,7 @@ export default function Selection({name, price}: {name: string, price: number}) 
 
   return (
     <React.Fragment>
-      <h2>{name}</h2>
+      <h5>{name}</h5>
       <span>{price}</span>
     </React.Fragment>
   );
