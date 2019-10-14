@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
-import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
+import { readAllFromStorage } from '../../utilities/localStorageService';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
 
 const useStyles = makeStyles({
   closeButton: {
@@ -23,7 +23,7 @@ export default function Betslip() {
   const classes = useStyles();
 
   const [state, setState] = React.useState({
-    right: false,
+    right: true,
   });
 
   const toggleDrawer = (side: DrawerSide, isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -46,18 +46,17 @@ export default function Betslip() {
     >
       <Button onClick={toggleDrawer(side, false)} className={classes.closeButton}>X</Button>
       <List>
-        <ListItem button={true} key={'SEL_1'} data-selelection-id={'SEL_1'}>
-          <ListItemText secondary={'Real Madrid to WIN'} />
-          <ListItemText primary={'1.2'} />
-          <Button onClick={removeSelection}>Delete</Button>
-        </ListItem>
-        <Divider />
-        <ListItem button={true} key={'SEL_4'} data-selelection-id={'SEL_4'}>
-          <ListItemText secondary={'Messi to Score First'} />
-          <ListItemText primary={'1.3'} />
-          <Button onClick={removeSelection}>Delete</Button>
-        </ListItem>
-        <Divider />
+        {readAllFromStorage().map(sel => {
+          if (sel) {
+            const parsedSelectionObj = JSON.parse(sel);
+            return <ListItem button={true} key={parsedSelectionObj.id} data-selelection-id={parsedSelectionObj.id}>
+              <ListItemText secondary={parsedSelectionObj.name} />
+              <ListItemText primary={parsedSelectionObj.price} />
+              <Button onClick={removeSelection}>Delete</Button>
+            </ListItem>
+          }
+          return;
+        })}
       </List>
     </div>;
 

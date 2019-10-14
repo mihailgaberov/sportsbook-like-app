@@ -1,6 +1,8 @@
 // Create a record
 export const createRecord = (key: string, value: string): { error?: string } | void => {
-  if (!key || !value) { return { error: 'Store to localStorage failed. Invalid key or value.' }; }
+  if (!key || !value) {
+    return { error: 'Store to localStorage failed. Invalid key or value.' };
+  }
   localStorage.setItem(key, value);
 };
 
@@ -11,13 +13,17 @@ export const readRecord = (key: string): string | null => {
 
 // Update a record
 export const updateRecord = (key: string, value: string): { error?: string } | void => {
-  if (!key || !value) { return { error: 'Store to localStorage failed. Invalid key or value.' }; }
+  if (!key || !value) {
+    return { error: 'Store to localStorage failed. Invalid key or value.' };
+  }
   localStorage.setItem(key, value);
 };
 
 // Delete a record
 export const deleteRecord = (key: string): { error?: string } | void => {
-  if (!key) { return { error: 'Store to localStorage failed. Invalid key.' }; }
+  if (!key) {
+    return { error: 'Store to localStorage failed. Invalid key.' };
+  }
   localStorage.removeItem(key)
 };
 
@@ -40,4 +46,21 @@ export const storeToLocalStorage = (key: string, value: string): void => {
       createRecord(key, value);
     }
   }
+};
+
+// Read all records that have ID starting with 'SEL_' from local storage
+export const readAllFromStorage = () => {
+  const values = [];
+  const keys = Object.keys(localStorage);
+  let i = keys.length;
+
+  while (i--) {
+    const item = localStorage.getItem(keys[i]);
+    const parsedItem = item ? JSON.parse(item) : null;
+    if (parsedItem && parsedItem.id && parsedItem.id.startsWith('SEL_')) {
+      values.push(localStorage.getItem(keys[i]));
+    }
+  }
+
+  return values;
 };

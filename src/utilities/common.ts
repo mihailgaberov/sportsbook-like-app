@@ -14,7 +14,7 @@ export const fakeBet = (context: any, event: any) => {
         return reject()
       }
 
-      storeToLocalStorage(eventData.id, eventData);
+      storeToLocalStorage(eventData.id, JSON.stringify(eventData));
 
       return resolve(eventData);
     }, 1000);
