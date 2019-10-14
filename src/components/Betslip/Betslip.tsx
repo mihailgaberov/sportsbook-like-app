@@ -6,6 +6,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { readAllFromStorage } from '../../utilities/localStorageService';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
+import { bettingMachine } from '../../state-machines/betting-machine';
+import { useMachine } from "@xstate/react/lib";
+
 
 const useStyles = makeStyles({
   closeButton: {
@@ -24,19 +27,40 @@ export default function Betslip() {
 
   const [state, setState] = React.useState({
     right: true,
+    data: readAllFromStorage()
   });
+
+  const [, send] = useMachine(bettingMachine);
 
   const toggleDrawer = (side: DrawerSide, isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
       return;
     }
 
-    setState({ ...state, [side]: isOpen });
+    setState({ ...state, [side]: isOpen, data: readAllFromStorage() });
   };
 
   const removeSelection = (e: React.MouseEvent): any => {
-    // @ts-ignore
-    console.log(e.currentTarget.parentElement.dataset.selelectionId);
+    const selectionId = e.currentTarget.parentElement ? e.currentTarget.parentElement.dataset.selelectionId : null;
+
+    if (selectionId) {
+      const arrData = [...state.data];
+      const elementToRemove = arrData.filter(el => {
+        if (el) {
+          return JSON.parse(el).id === selectionId
+        }
+        return null;
+      })[0];
+
+      if (elementToRemove) {
+
+        send('TOGGLE_SELECTION', {data: JSON.parse(elementToRemove)});
+
+        const idx = arrData.indexOf(elementToRemove);
+        arrData.splice(idx, 1);
+        setState({...state, data: arrData});
+      }
+    }
   };
 
   const sideList = (side: DrawerSide) =>
@@ -46,7 +70,7 @@ export default function Betslip() {
     >
       <Button onClick={toggleDrawer(side, false)} className={classes.closeButton}>X</Button>
       <List>
-        {readAllFromStorage().map(sel => {
+        {state.data.map(sel => {
           if (sel) {
             const parsedSelectionObj = JSON.parse(sel);
             return <ListItem button={true} key={parsedSelectionObj.id} data-selelection-id={parsedSelectionObj.id}>
