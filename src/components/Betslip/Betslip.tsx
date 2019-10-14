@@ -18,12 +18,14 @@ const useStyles = makeStyles({
 });
 
 export default function Betslip() {
+  type DrawerSide = 'right';
+
   const classes = useStyles();
+
   const [state, setState] = React.useState({
     right: false,
   });
 
-  type DrawerSide = 'right';
   const toggleDrawer = (side: DrawerSide, isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
       return;
@@ -61,7 +63,7 @@ export default function Betslip() {
 
   return (
     <div>
-      {/*<Button onClick={toggleDrawer('right', true)}>Open Right</Button>*/}
+      <Button onClick={toggleDrawer('right', true)}>Open Right</Button>
       <Drawer anchor="right" open={state.right} onClose={toggleDrawer('right', false)}>
         {sideList('right')}
       </Drawer>

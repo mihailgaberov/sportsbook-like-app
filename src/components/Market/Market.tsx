@@ -20,11 +20,11 @@ export default function Market({name, selections = []}: {name: string, selection
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <>
       <h3 className={classes.marketName}>{name}</h3>
       <Box className={classes.marketSelections}>
-        {selections.map(sel => <Selection key={sel.id} name={sel.name} price={sel.price} />)}
+        {selections.map(sel => <Selection key={sel.id} data={sel} />)}
       </Box>
-    </React.Fragment>
+    </>
   );
 }
