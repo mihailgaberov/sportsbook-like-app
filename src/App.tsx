@@ -1,21 +1,26 @@
 import * as React from 'react';
-import Betslip from "./components/Betslip";
-import EventsList from "./components/EventsList";
-import SportsAppBar from "./components/SportsAppBar";
-import mockSportData from './mocks/sport-events';
-import { normalizeEventsData } from "./utilities/common";
+import Betslip from './components/Betslip';
+import EventsList from './components/EventsList';
+import SportsAppBar from './components/SportsAppBar';
+import { normalizeEventsData } from './utilities/common';
+import { sportsDataMachine } from './state-machines/sports-data-machine';
+import { useMachine } from '@xstate/react';
 
 
-class App extends React.Component {
-  public render() {
-    return (
-      <div>
-        <SportsAppBar />
-        <EventsList events={normalizeEventsData(mockSportData)} />
-        <Betslip />
-      </div>
-    );
+export default function App() {
+  const [current, , sdm] = useMachine(sportsDataMachine);
+  const sportsData = [];
+
+  if (current.value === 'success') {
+    // @ts-ignore
+    sportsData = current.context.data;
   }
-}
 
-export default App;
+  sdm.start().send('FETCH');
+
+  return <div>
+    <SportsAppBar />
+    <EventsList events={normalizeEventsData(sportsData)} />
+    <Betslip />
+  </div>
+}

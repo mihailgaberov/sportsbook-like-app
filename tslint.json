@@ -19,6 +19,7 @@
         "named-imports-order": "case-insensitive"
       }
     ],
+    "object-literal-sort-keys": false,
     "no-console": false
   }
 }

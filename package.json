@@ -8,7 +8,8 @@
     "react-scripts-ts": "3.1.0",
     "xstate": "^4.6.7",
     "@material-ui/core": "latest",
-    "@material-ui/icons": "latest"
+    "@material-ui/icons": "latest",
+    "@xstate/react": "latest"
   },
   "scripts": {
     "start": "react-scripts-ts start",

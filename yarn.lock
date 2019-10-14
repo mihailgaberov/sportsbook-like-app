@@ -137,6 +137,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@xstate/react@latest":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@xstate/react/-/react-0.7.1.tgz#36d2143ba0d979017efa3c9566894c32cf5de0ee"
+
 abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
