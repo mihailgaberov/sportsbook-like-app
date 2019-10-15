@@ -3,23 +3,22 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import Betslip from './Betslip';
 
-var localStorageMock = (function() {
-  var store = {};
+const localStorageMock = (() => {
+  let store = {};
   return {
-    getItem: function(key: string | number) {
-      return store[key];
-    },
-    setItem: function(key: string | number, value: { toString: () => void; }) {
+    getItem: (key: string | number) => store[key],
+    setItem: (key: string | number, value: { toString: () => void; }) => {
       store[key] = value.toString();
     },
-    clear: function() {
+    clear: () => {
       store = {};
     },
-    removeItem: function(key: string | number) {
+    removeItem: (key: string | number) => {
       delete store[key];
     }
   };
 })();
+
 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
 const setup = () => {
