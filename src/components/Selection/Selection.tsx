@@ -25,18 +25,20 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Selection({ data }: { data: ISelectionType }) {
+export default function Selection({ data, toUnselectId = '' }: { data: ISelectionType, toUnselectId: string }) {
   const classes = useStyles();
-  const [current, send] = useMachine(bettingMachine);
+  const [, send] = useMachine(bettingMachine);
 
   const makeSelection = () => {
     send('TOGGLE_SELECTION', { data });
   };
 
-  const isSelected = (selectionId: string) => readRecord(selectionId) || current.matches('success');
+  const isSelected = (selectionId: string) => (readRecord(selectionId) && selectionId !== toUnselectId);
 
   return (
-    <Button className={classes.selection} classes={{ label: classes.buttonLabel, root: isSelected(data.id) ? classes.selectionAdded : ''}} onClick={makeSelection}>
+    <Button className={classes.selection}
+            classes={{ label: classes.buttonLabel, root: isSelected(data.id) ? classes.selectionAdded : '' }}
+            onClick={makeSelection}>
       <h5 className={classes.name}>{data.name}</h5>
       <span>{data.price}</span>
     </Button>

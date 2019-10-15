@@ -16,14 +16,14 @@ const useStyles = makeStyles({
 });
 
 
-export default function Market({name, selections = []}: {name: string, selections: ISelectionType[]}) {
+export default function Market({name, selections = [], toUnselectId}: {name: string, selections: ISelectionType[], toUnselectId: string}) {
   const classes = useStyles();
 
   return (
     <>
       <h3 className={classes.marketName}>{name}</h3>
       <Box className={classes.marketSelections}>
-        {selections.map(sel => <Selection key={sel.id} data={sel} />)}
+        {selections.map(sel => <Selection key={sel.id} data={sel} toUnselectId={toUnselectId} />)}
       </Box>
     </>
   );

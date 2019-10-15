@@ -9,7 +9,6 @@ import ListItem from '@material-ui/core/ListItem';
 import { bettingMachine } from '../../state-machines/betting-machine';
 import { useMachine } from "@xstate/react/lib";
 
-
 const useStyles = makeStyles({
   closeButton: {
     margin: '7px',
@@ -20,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Betslip() {
+export default function Betslip({removeSelectionCallback}: {removeSelectionCallback: (selectionId: string) => void}) {
   type DrawerSide = 'right';
 
   const classes = useStyles();
@@ -54,11 +53,12 @@ export default function Betslip() {
 
       if (elementToRemove) {
 
-        send('TOGGLE_SELECTION', {data: JSON.parse(elementToRemove)});
+        send('TOGGLE_SELECTION', { data: JSON.parse(elementToRemove) });
 
         const idx = arrData.indexOf(elementToRemove);
         arrData.splice(idx, 1);
-        setState({...state, data: arrData});
+        setState({ ...state, data: arrData });
+        removeSelectionCallback(selectionId);
       }
     }
   };
@@ -86,7 +86,7 @@ export default function Betslip() {
 
   return (
     <div>
-      <Button onClick={toggleDrawer('right', true)}>Open Right</Button>
+      <Button onClick={toggleDrawer('right', true)}>Open Betslip</Button>
       <Drawer anchor="right" open={state.right} onClose={toggleDrawer('right', false)}>
         {sideList('right')}
       </Drawer>
