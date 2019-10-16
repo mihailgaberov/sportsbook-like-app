@@ -11,7 +11,6 @@
     "enzyme": "latest",
     "enzyme-adapter-react-16": "latest",
     "enzyme-to-json": "latest",
-    "jest": "^24.9.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-scripts-ts": "3.1.0",
@@ -22,7 +21,8 @@
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
