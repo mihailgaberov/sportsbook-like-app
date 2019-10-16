@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Market from './Market';
-import mockSportData from '../../mocks/sport-events';
+import mockSportData from '../../__mocks__/sport-events';
 
 jest.mock('../../utilities/localStorageService');
 

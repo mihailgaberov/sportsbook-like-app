@@ -1,6 +1,5 @@
-import { Drawer } from '@material-ui/core';
-import { shallow } from "enzyme";
 import * as React from "react";
+import { render } from '@testing-library/react';
 import Betslip from "./Betslip";
 
 
@@ -26,17 +25,12 @@ const localStorageMock = (() => {
 Object.defineProperty(window, "localStorage", { value: localStorageMock });
 
 const setup = () => {
-  return shallow(<Betslip removeSelectionCallback={jest.fn} />);
+  return render(<Betslip removeSelectionCallback={jest.fn} />);
 };
 
 describe("Betslip", () => {
   it("renders without crashing", () => {
     const wrapper = setup();
     expect(wrapper).not.toBe(null);
-  });
-
-  it("should be able to render drawer", () => {
-    const wrapper = setup();
-    expect(wrapper.find(Drawer).length).toBe(1);
   });
 });

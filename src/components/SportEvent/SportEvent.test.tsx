@@ -1,14 +1,18 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import mockSportData from '../../__mocks__/sport-events';
 import SportEvent from './SportEvent';
-import mockSportData from '../../mocks/sport-events';
+import { render } from '@testing-library/react';
 
 jest.mock('../../utilities/localStorageService');
 
+
+const setup = () => {
+  return render(<SportEvent name={'test'} markets={mockSportData[0].markets} toUnselectId={'SEL_1'} />);
+};
+
 describe('SportEvent', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<SportEvent name={'test'} markets={mockSportData[0].markets} toUnselectId={'SEL_1'} />, div);
-    ReactDOM.unmountComponentAtNode(div);
+    const wrapper = setup();
+    expect(wrapper).not.toBe(null);
   });
 });

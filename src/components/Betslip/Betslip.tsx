@@ -34,6 +34,7 @@ export default function Betslip({removeSelectionCallback}: {removeSelectionCallb
   const toggleDrawer = (side: DrawerSide, isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
       return;
+      
     }
 
     setState({ ...state, [side]: isOpen, data: readAllFromStorage() });
