@@ -5,7 +5,7 @@ export interface Props {
   onUsernameChange: (username: string) => void;
   onPasswordChange: (password: string) => void;
   onRememberChange: (remember: boolean) => void;
-  onSubmit: (username: string, password: string) => void;
+  onSubmit: (username: string, password: string, remember: boolean) => void;
 }
 
 function LoginForm(props: Props) {
@@ -33,7 +33,7 @@ function LoginForm(props: Props) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    props.onSubmit(username, password);
+    props.onSubmit(username, password, remember);
   };
 
   return (
