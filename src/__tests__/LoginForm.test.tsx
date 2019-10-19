@@ -1,10 +1,37 @@
-// import React from "react";
-// import { render, fireEvent, waitForElement } from "@testing-library/react";
+import React from "react";
+import { render } from "@testing-library/react";
+import { toHaveFormValues } from "@testing-library/jest-dom";
+import LoginForm, { Props } from "../LoginForm";
 
-// import LoginForm, { Props } from "../LoginForm";
+function renderLoginForm(props: Partial<Props> = {}) {
+  const defaultProps: Props = {
+    onPasswordChange() {
+      return;
+    },
+    onRememberChange() {
+      return;
+    },
+    onUsernameChange() {
+      return;
+    },
+    onSubmit() {
+      return;
+    },
+    shouldRemember: true
+  };
+  return render(<LoginForm {...defaultProps} {...props} />);
+}
 
 describe("<LoginForm />", () => {
   test("should display a blank login form, with remember me checked by default", async () => {
-    expect(true).toBe(true);
+    const { findByTestId } = renderLoginForm();
+
+    const loginForm = await findByTestId("login-form");
+
+    expect(loginForm).toHaveFormValues({
+      username: "",
+      password: "",
+      remember: true
+    });
   });
 });
