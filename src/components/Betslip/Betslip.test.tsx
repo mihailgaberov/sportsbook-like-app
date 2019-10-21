@@ -25,7 +25,7 @@ const localStorageMock = (() => {
 Object.defineProperty(window, "localStorage", { value: localStorageMock });
 
 const setup = () => {
-  return render(<Betslip removeSelectionCallback={jest.fn} />);
+  return render(<Betslip />);
 };
 
 describe("Betslip", () => {

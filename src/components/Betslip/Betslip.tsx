@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -8,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import { bettingMachine } from '../../state-machines/betting-machine';
 import { useMachine } from "@xstate/react/lib";
+import { SelectionsContext } from "../../utilities/SelectionsProvider";
 
 const useStyles = makeStyles({
   closeButton: {
@@ -19,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Betslip({removeSelectionCallback}: {removeSelectionCallback: (selectionId: string) => void}) {
+export default function Betslip() {
   type DrawerSide = 'right';
 
   const classes = useStyles();
@@ -28,7 +30,7 @@ export default function Betslip({removeSelectionCallback}: {removeSelectionCallb
     right: true,
     data: readAllFromStorage()
   });
-
+  const { dispatch } = useContext(SelectionsContext);
   const [, send] = useMachine(bettingMachine);
 
   const toggleDrawer = (side: DrawerSide, isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -59,7 +61,7 @@ export default function Betslip({removeSelectionCallback}: {removeSelectionCallb
         const idx = arrData.indexOf(elementToRemove);
         arrData.splice(idx, 1);
         setState({ ...state, data: arrData });
-        removeSelectionCallback(selectionId);
+        dispatch({type:"UNSELECT", payload: selectionId });
       }
     }
   };

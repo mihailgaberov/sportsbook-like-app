@@ -1,5 +1,5 @@
 import * as React from "react";
-// import Betslip from "./components/Betslip";
+import Betslip from "./components/Betslip";
 import EventsList from "./components/EventsList";
 import SportsAppBar from "./components/SportsAppBar";
 import { normalizeEventsData } from "./utilities/common";
@@ -21,7 +21,7 @@ export default function App() {
     <div>
         <SportsAppBar />
         <EventsList events={normalizeEventsData(sportsData)} />
-        {/* <Betslip /> */}
+        <Betslip />
     </div>
   );
 }
