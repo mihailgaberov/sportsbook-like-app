@@ -1,44 +1,54 @@
-import * as React from 'react';
+import * as React from "react";
+import { useContext } from "react";
 import { makeStyles } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import { useMachine } from '@xstate/react';
-import { bettingMachine } from '../../state-machines/betting-machine';
+import { useMachine } from "@xstate/react";
+import { bettingMachine } from "../../state-machines/betting-machine";
 import { readRecord } from "../../utilities/localStorageService";
+import { SelectionsContext } from "../../utilities/SelectionsProvider";
 
 const useStyles = makeStyles({
   buttonLabel: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column"
   },
   name: {
-    margin: '0',
+    margin: "0"
   },
   selection: {
-    backgroundColor: 'black',
-    color: 'white',
-    margin: '7px',
-    padding: '4px 14px',
-    textAlign: 'center',
+    backgroundColor: "black",
+    color: "white",
+    margin: "7px",
+    padding: "4px 14px",
+    textAlign: "center"
   },
   selectionAdded: {
-    backgroundColor: '#00d29b',
+    backgroundColor: "#00d29b"
   }
 });
 
-export default function Selection({ data, toUnselectId = '' }: { data: ISelectionType, toUnselectId: string }) {
+export default function SelectionHooked({ data }: { data: ISelectionType }) {
   const classes = useStyles();
   const [, send] = useMachine(bettingMachine);
+  const { state, dispatch } = useContext(SelectionsContext);
 
+  console.log(state);
   const makeSelection = () => {
-    send('TOGGLE_SELECTION', { data });
+    send("TOGGLE_SELECTION", { data });
+    dispatch({type:"SELECT", payload: data.id });
   };
 
-  const isSelected = (selectionId: string) => (readRecord(selectionId) && selectionId !== toUnselectId);
+  const isSelected = (selectionId: string) => readRecord(selectionId) && selectionId !== state.selectionId;
 
   return (
-    <Button className={classes.selection}
-            classes={{ label: classes.buttonLabel, root: isSelected(data.id) ? classes.selectionAdded : '' }}
-            onClick={makeSelection}>
+    <Button
+      className={classes.selection}
+      classes={{
+        label: classes.buttonLabel,
+        root: isSelected(data.id) ? classes.selectionAdded : ""
+      }}
+      onClick={makeSelection}
+    >
       <h5 className={classes.name}>{data.name}</h5>
       <span>{data.price}</span>
     </Button>

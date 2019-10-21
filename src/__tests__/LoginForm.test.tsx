@@ -1,10 +1,10 @@
+import LoginForm, { IProps } from "../LoginForm";
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 
-import LoginForm, { Props } from "../LoginForm";
 
-function renderLoginForm(props: Partial<Props> = {}) {
-  const defaultProps: Props = {
+function renderLoginForm(props: Partial<IProps> = {}) {
+  const defaultProps: IProps = {
     onPasswordChange() {
       return;
     },
@@ -39,22 +39,22 @@ describe("<LoginForm />", () => {
     const onUsernameChange = jest.fn();
     const { findByTestId } = renderLoginForm({ onUsernameChange });
     const username = await findByTestId("username");
-  
+
     fireEvent.change(username, { target: { value: "test" } });
-  
+
     expect(onUsernameChange).toHaveBeenCalledWith("test");
   });
-  
+
   test("should allow entering a password", async () => {
     const onPasswordChange = jest.fn();
     const { findByTestId } = renderLoginForm({ onPasswordChange });
     const username = await findByTestId("password");
-  
+
     fireEvent.change(username, { target: { value: "password" } });
-  
+
     expect(onPasswordChange).toHaveBeenCalledWith("password");
   });
-  
+
   test("should allow toggling remember me", async () => {
     const onRememberChange = jest.fn();
     const { findByTestId } = renderLoginForm({
@@ -62,13 +62,13 @@ describe("<LoginForm />", () => {
       shouldRemember: false
     });
     const remember = await findByTestId("remember");
-  
+
     fireEvent.click(remember);
-  
+
     expect(onRememberChange).toHaveBeenCalledWith(true);
-  
+
     fireEvent.click(remember);
-  
+
     expect(onRememberChange).toHaveBeenCalledWith(false);
   });
 
@@ -82,13 +82,13 @@ describe("<LoginForm />", () => {
     const password = await findByTestId("password");
     const remember = await findByTestId("remember");
     const submit = await findByTestId("submit");
-  
+
     fireEvent.change(username, { target: { value: "test" } });
     fireEvent.change(password, { target: { value: "password" } });
 
     fireEvent.click(remember);
     fireEvent.click(submit);
-  
+
     expect(onSubmit).toHaveBeenCalledWith("test", "password", true);
   });
 });

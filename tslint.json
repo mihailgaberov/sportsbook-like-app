@@ -13,7 +13,7 @@
   },
   "rules": {
     "ordered-imports": [
-      true,
+      false,
       {
         "import-sources-order": "any",
         "named-imports-order": "case-insensitive"
@@ -21,5 +21,8 @@
     ],
     "object-literal-sort-keys": false,
     "no-console": false
+  },
+  "jsRules": {
+    "object-literal-sort-keys": false
   }
 }

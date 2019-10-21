@@ -1,6 +1,6 @@
 import React from "react";
 
-export interface Props {
+export interface IProps {
   shouldRemember: boolean;
   onUsernameChange: (username: string) => void;
   onPasswordChange: (password: string) => void;
@@ -8,7 +8,7 @@ export interface Props {
   onSubmit: (username: string, password: string, remember: boolean) => void;
 }
 
-function LoginForm(props: Props) {
+function LoginForm(props: IProps) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [remember, setRemember] = React.useState(props.shouldRemember);
