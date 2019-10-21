@@ -8,15 +8,23 @@ export interface IAppContext {
 
 const SelectionsContext = React.createContext<IAppContext | any>({});
 const initialState = {
-  selectionId: ""
+  selections: []
 };
 
 const reducer = (state: any, action: { type: any; payload: any }) => {
   switch (action.type) {
-    case "UNSELECT":
-      return initialState;
-    case "SELECT":
-      return { ...state, selectionId: action.payload };
+    case "TOGGLE_SELECTIONS_STATE":
+      if (state.selections.includes(action.payload)) {
+        state.selections = state.selections.filter(
+          (id: string) => id !== action.payload
+        )
+      } else {
+        state.selections = [...state.selections, action.payload]
+      }
+      return {
+        ...state,
+        selections: state.selections
+      };
     default:
       return initialState;
   }

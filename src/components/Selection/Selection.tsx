@@ -35,10 +35,10 @@ export default function SelectionHooked({ data }: { data: ISelectionType }) {
   console.log(state);
   const makeSelection = () => {
     send("TOGGLE_SELECTION", { data });
-    dispatch({type:"SELECT", payload: data.id });
+    dispatch({type:"TOGGLE_SELECTIONS_STATE", payload: data.id });
   };
 
-  const isSelected = (selectionId: string) => readRecord(selectionId) && selectionId !== state.selectionId;
+  const isSelected = (selectionId: string) => readRecord(selectionId) && state.selections.includes(selectionId);
 
   return (
     <Button

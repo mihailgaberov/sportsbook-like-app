@@ -61,7 +61,7 @@ export default function Betslip() {
         const idx = arrData.indexOf(elementToRemove);
         arrData.splice(idx, 1);
         setState({ ...state, data: arrData });
-        dispatch({type:"UNSELECT", payload: selectionId });
+        dispatch({type:"TOGGLE_SELECTIONS_STATE", payload: selectionId });
       }
     }
   };
