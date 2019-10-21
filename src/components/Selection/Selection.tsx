@@ -32,7 +32,6 @@ export default function SelectionHooked({ data }: { data: ISelectionType }) {
   const [, send] = useMachine(bettingMachine);
   const { state, dispatch } = useContext(SelectionsContext);
 
-  console.log(state);
   const makeSelection = () => {
     send("TOGGLE_SELECTION", { data });
     dispatch({type:"TOGGLE_SELECTIONS_STATE", payload: data.id });
