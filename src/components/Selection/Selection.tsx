@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SelectionHooked({ data }: { data: ISelectionType }) {
+export default function Selection({ data }: { data: ISelectionType }) {
   const classes = useStyles();
   const [, send] = useMachine(bettingMachine);
   const { state, dispatch } = useContext(SelectionsContext);
