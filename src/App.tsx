@@ -5,6 +5,7 @@ import SportsAppBar from "./components/SportsAppBar";
 import { normalizeEventsData } from "./utilities/common";
 import { sportsDataMachine } from "./state-machines/sports-data-machine";
 import { useMachine } from "@xstate/react";
+import SelectionsCounter from './components/SelectionsCounter/SelectionsCounter';
 
 export default function App() {
   const [current, , sdm] = useMachine(sportsDataMachine);
@@ -20,6 +21,7 @@ export default function App() {
   return (
     <div>
         <SportsAppBar />
+        <SelectionsCounter />
         <EventsList events={normalizeEventsData(sportsData)} />
         <Betslip />
     </div>

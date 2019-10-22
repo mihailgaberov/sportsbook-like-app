@@ -1,7 +1,6 @@
 {
   "name": "sportsbook-like-app",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
