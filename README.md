@@ -1,4 +1,4 @@
-# Addison Global Sportsbook
+# Sportsbook-like app (POC)
 
 A React single page application (SPA) built with the following technologies:
 - React with TypeScript (`create-react-app my-app --scripts-version=react-scripts-ts`)
