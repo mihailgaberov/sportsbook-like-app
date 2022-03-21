@@ -1,7 +1,11 @@
-import { deleteRecord, readRecord, storeToLocalStorage } from "./localStorageService";
+import {
+  deleteRecord,
+  readRecord,
+  storeToLocalStorage
+} from "./localStorageService";
 
 export const normalizeEventsData = (rawData: IEventType[]) => {
-  return rawData.filter((e: IEventType) => e.markets.length > 0)
+  return rawData.filter((e: IEventType) => e.markets.length > 0);
 };
 
 export const fakeBet = (context: any, event: any) => {
@@ -9,9 +13,12 @@ export const fakeBet = (context: any, event: any) => {
     setTimeout(() => {
       const eventData = event.data;
 
+      console.log(">>>", eventData);
+      console.log("readRecord(eventData.id): ", readRecord(eventData.id));
+
       if (readRecord(eventData.id)) {
         deleteRecord(eventData.id);
-        return reject()
+        return reject();
       }
 
       storeToLocalStorage(eventData.id, JSON.stringify(eventData));

@@ -1,7 +1,10 @@
 // Create a record
-export const createRecord = (key: string, value: string): { error?: string } | void => {
+export const createRecord = (
+  key: string,
+  value: string
+): { error?: string } | void => {
   if (!key || !value) {
-    return { error: 'Store to localStorage failed. Invalid key or value.' };
+    return { error: "Store to localStorage failed. Invalid key or value." };
   }
   localStorage.setItem(key, value);
 };
@@ -12,9 +15,12 @@ export const readRecord = (key: string): string | null => {
 };
 
 // Update a record
-export const updateRecord = (key: string, value: string): { error?: string } | void => {
+export const updateRecord = (
+  key: string,
+  value: string
+): { error?: string } | void => {
   if (!key || !value) {
-    return { error: 'Store to localStorage failed. Invalid key or value.' };
+    return { error: "Store to localStorage failed. Invalid key or value." };
   }
   localStorage.setItem(key, value);
 };
@@ -22,9 +28,9 @@ export const updateRecord = (key: string, value: string): { error?: string } | v
 // Delete a record
 export const deleteRecord = (key: string): { error?: string } | void => {
   if (!key) {
-    return { error: 'Delete from localStorage failed. Invalid key.' };
+    return { error: "Delete from localStorage failed. Invalid key." };
   }
-  localStorage.removeItem(key)
+  localStorage.removeItem(key);
 };
 
 // Clear all
@@ -35,7 +41,6 @@ export const hasStoredItems = (): boolean => localStorage.length > 0;
 
 // Check for support
 export const isLocalStorageSupported = (): boolean => !!window.localStorage;
-
 
 // Store (create or update) record to local storage
 export const storeToLocalStorage = (key: string, value: string): void => {
@@ -56,8 +61,15 @@ export const readAllFromStorage = () => {
 
   while (i--) {
     const item = localStorage.getItem(keys[i]);
-    const parsedItem = item ? JSON.parse(item) : null;
-    if (parsedItem && parsedItem.id && parsedItem.id.startsWith('SEL_')) {
+    let parsedItem = null;
+
+    try {
+      parsedItem = item ? JSON.parse(item) : null;
+    } catch (e) {
+      console.log("error reading local storage", e);
+    }
+
+    if (parsedItem && parsedItem.id && parsedItem.id.startsWith("SEL_")) {
       values.push(localStorage.getItem(keys[i]));
     }
   }
