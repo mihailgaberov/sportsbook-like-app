@@ -24,6 +24,6 @@ export const fakeBet = (context: any, event: any) => {
       storeToLocalStorage(eventData.id, JSON.stringify(eventData));
 
       return resolve(eventData);
-    }, 1000);
+    }, 0);
   });
 };
