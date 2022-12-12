@@ -6,7 +6,7 @@ import Box from "@material-ui/core/Box";
 const useStyles = makeStyles({
   marketName: {
     color: "grey",
-    margin: "14px 0"
+    margin: "1em 0"
   },
   marketSelections: {
     display: "flex",
